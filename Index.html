@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>奔跑吧，鹿人</title>
+		<!--移动端版本兼容 -->
+		<script type="text/javascript">
+			var phoneW = parseInt(window.screen.width),
+				phoneScale = phoneW / 640,
+				ua = navigator.userAgent;
+			if(/Android (\d+\.\d+)/.test(ua)) {
+				var version = parseFloat(RegExp.$1);
+				if(version > 2.3) {
+					document.write('<meta name="viewport" content="width=640, initial-scale=' + phoneScale + ', minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+				} else {
+					document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+				}
+			} else {
+				document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+			}
+		</script>
+		<!--移动端版本兼容 end -->
+		<!--<link rel="stylesheet" href="css/main.css">-->
+		<link rel="stylesheet" type="text/css" href="css/main1.2.css"/>
+		<link rel="stylesheet" href="css/animate.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" />
+		<style type="text/css">
+			.wrap {
+				width: 100%;
+				height: 100%;
+				margin: 50% auto;
+				position: relative;
+				text-align: center;
+			}
+			.dice {
+				-webkit-tap-highlight-color: transparent;
+				width: 500px;
+				height: 360px;
+				background: cover;
+				background-size: contain;
+				background: url(images/bug_egg.png) no-repeat;
+				cursor: pointer;
+				margin: 0 auto;
+			}
+			.dice_1 {
+				background-position: 0 0px;
+			}
+			
+			.dice_2 {
+				background-position: 0 -360px;
+			}
+			
+			.dice_3 {
+				background-position: 0 -720px;
+			}
+			.dice_4 {
+				background-position: 0 -1080px;
+			}
+			.dice_5 {
+				background-position: 0 -1440px;
+			}
+			
+			.dice_6 {
+				background-position: 0 -1820px;
+			}
+			
+			#dice_mask {
+				width: 100%;
+				height: 100%;
+				background: #fff;
+				opacity: 0;
+				position: absolute;
+				top: 0;
+				left: 0;
+				z-index: 999;
+			}
+			._bg_show {}
+		</style>
+		<script type="text/javascript">
+		</script>
+	</head>
+
+	<body ontouchstart='return false;'>
+		<!--
+	进入页面的提示框
+-->
+
+		<div class="_bg_show"></div>
+		<!--BEGIN dialog1-->
+		<div class="js_dialog" id="iosDialog1" style="display: none;">
+			<div class="weui-mask"></div>
+			<div class="weui-dialog">
+				<div class="weui-dialog__hd"><strong class="weui-dialog__title">弹窗标题</strong></div>
+				<div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+				<div class="weui-dialog__ft">
+					<a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary">主操作</a>
+					<input type="hidden" id="code" name="codes">
+					<div type="hidden" id="egg_prize" name="egg_prizes" /></div>
+			</div>
+		</div>
+		</div>
+		<section class="loading">
+			<div class="roundSpinner">
+				<div class="bounce1"></div>
+				<div class="bounce2"></div>
+				<div class="bounce3"></div>
+			</div>
+		</section>
+		<div class="main">
+			<!--首页按钮-->
+			<!--<div class="index_music btnIco"><div class="close_showBtn" style="width: 72px;height: 3px;background: #FFFFFF;transform: rotate(232deg);position:absolute;top:38px;right: 4px;display: none;"></div>音乐</div>
+			<div class="index_rule btnIco">规则</div>-->
+			<div class="myBtn btnIco animated fadeInLeft">我的</div>
+			<div class="viewBtn btnIco animated fadeInLeft del03">排行榜</div>
+			<div class="ruleBtn btnIco animated fadeInRight">规则</div>
+			<div class="musicBtn btnIco animated fadeInRight del03"><div class="close_musicBtn" style="width: 72px;height: 3px;background: #FFFFFF;transform: rotate(232deg);position:absolute;top:38px;right: 4px;display:none;"></div>音乐</div>
+			<!-- 封面页面 -->
+			<div class="infoPage">
+				<div class="tit animated zoomIn del05"><img class='scaleAm' src="images/title.png" alt=""></div>
+				<div class='gz animated fadeInUp del05'>
+					<div class="gzTxt gameStartBtn"><img class='scaleAm2' src="images/gamestarttxt.png" height="79" width="81" alt=""></div>
+					<img src="images/gz.png" height="186" width="201" alt="">
+				</div>
+				<div class="copyright animated fadeInUp del05"></div>
+				<div class="bg animated zoomIn2 dur5"><img src="images/bg.jpg" height="1136" width="640" alt=""></div>
+			</div>
+			<!-- 我的 -->
+			<div class="myPanel panel animated fadeIn dur05 packPanel">
+				<div class="scoreBox animated zoomIn dur03 del03">
+					<div class="scoreTxt">
+						<img src="images/t1.png" height="37" width="250" alt="">
+						<img src="images/t2.png" alt="">
+						<div class="t2">0</div>
+						<img src="images/t3.png" alt="">
+						<div class='playGameNum'>0</div>
+						<div class="prized " style='font-size:30px; margin-top:10px; display:none;'>已领奖</div>
+						<span></span>
+					</div>
+					<!--<div class="score">没有记录</div>-->
+					<img src="images/score3.png" height="464" width="592" alt="">
+				</div>
+			</div>
+			<!--飒飒飒飒飒飒飒飒飒飒-->
+			<div class="myPanel panel animated fadeIn dur05 tishi_Panel">
+				<div class=" animated zoomIn dur03 del03 tishi_Box">
+					<div class="tishi_Txt" style="font-size: 35px;white-space: normal;margin: 0 auto;">
+					</div>
+					<!--<div class="score">没有记录</div>-->
+					<img src="images/tishi.png" height="464" width="494" alt="">
+				</div>
+			</div>
+			<!-- 游戏规则 -->
+			<div class="rulePanel panel animated fadeIn dur05">
+				<div class="ruleBox animated fadeInUp dur05 del03">
+					<a class="tel" href='tel:58898889'></a>
+					<div class="closeBtn"></div>
+					<img class="ruleImg" src="images/rule.png" alt="">
+				</div>
+			</div>
+
+			<!-- 游戏通关 -->
+			<div class="successPanel panel animated fadeIn dur05">
+				<div class="successBox">
+					<div id="dice"></div>
+					<span class="success_text">
+						<!--恭喜你砸中10000MB流量！-->
+					</span>
+					<div class="backBtn"></div>
+					<div class="continueBtn"></div>
+				</div>
+			</div>
+
+			<!-- 游戏失败 -->
+			<div class="failPanel panel animated fadeIn dur05">
+				<div class="failBox">
+					<div class="backBtn"></div>
+					<div class="failTxt">
+						<img style='display:none; position: absolute;top: -63px;left: 65px;' src="images/fail_txt.png" height="184" width="375" alt="">
+						<img style='display:none; position: absolute;top: -63px;left: 65px;' src="images/fail_ttt.png" alt="">
+						<img style="display:none; position: absolute;top: -92px;left: 68px;" src="images/eight_txt.png"/>
+						<img style="display:none; position: absolute;top: -35px;left: 68px;height:127px;width:358px" src="images/two_eight.png"/>
+						<div class='success_txt';">0</div>
+					</div>
+					<img src="images/fail.png" height="613" width="495" alt="">
+				</div>
+			</div>
+
+			<div class="hit"></div>
+
+			<!-- 游戏区 -->
+			<div class="game">
+				<!-- 角色 -->
+				<div class="role"></div>
+				<!-- 搭桥线 -->
+				<!-- <div class="line"></div> -->
+				<!-- 桥 -->
+				<div class="bridge">
+					<ul>
+						<li data-currentx='0'>
+							<!-- 搭桥线 -->
+							<div class="line"><span></span></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!----------------------new----------------->
+			<canvas id="canvas" width="640" height="1136"></canvas>
+			<script src="js/jquery-2.1.1.min.js"></script>
+			<script src='js/game.js'></script>
+			<!--<script src="js/game1.3.js"></script>-->
+			<script src="js/Game_bg.js"></script>
+			<script src="js/Background.js"></script>
+	</body>
+
+</html>

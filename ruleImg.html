@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--移动端版本兼容 -->
+		<script type="text/javascript">
+			var phoneW = parseInt(window.screen.width),
+				phoneScale = phoneW / 640,
+				ua = navigator.userAgent;
+			if(/Android (\d+\.\d+)/.test(ua)) {
+				var version = parseFloat(RegExp.$1);
+				if(version > 2.3) {
+					document.write('<meta name="viewport" content="width=640, initial-scale=' + phoneScale + ', minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+				} else {
+					document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+				}
+			} else {
+				document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+			}
+		</script>
+		<style type="text/css">
+			.rule_img {
+				text-align: center;
+				position: relative;
+			}
+			.close_btn {
+				width: 80px;
+				height: 80px;
+				position: absolute;
+				right:10px;
+				top: 86px;
+				opacity: 0;
+			}
+		</style>
+		<link rel="stylesheet" href="css/animate.css">
+		<link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css" />
+	</head ontouchstart='return false;'>
+
+	<body style="background: lightskyblue">
+		<div class="rule_img">
+			<img src="images/rule.png" alt="" />
+			<span class="close_btn"></span>
+		</div>
+	</body>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+//			$('.rule_img').on('touchstart',function(){
+//				window.location.href='Index.html'
+//			})
+			$('.close_btn').on('touchstart',function(){
+				window.location.href='Index.html'
+			})
+		})
+	</script>
+
+</html>

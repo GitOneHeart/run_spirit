@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale = 1, maximum-scale = 1, target-densitydpi=device-dpi">
+		<!--移动端版本兼容 -->
+		<script type="text/javascript">
+			var phoneW = parseInt(window.screen.width),
+				phoneScale = phoneW / 640,
+				ua = navigator.userAgent;
+			if(/Android (\d+\.\d+)/.test(ua)) {
+				var version = parseFloat(RegExp.$1);
+				if(version > 2.3) {
+					document.write('<meta name="viewport" content="width=640, initial-scale=' + phoneScale + ', minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+				} else {
+					document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+				}
+			} else {
+				document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+			}
+		</script>
+		<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+		<!--移动端版本兼容 end -->
+		<meta name="format-detection" content="telephone=no">
+		<title>闯关排行</title>
+		<style type="text/css">
+			html,
+			body {
+				margin: 0px;
+				padding: 0px;
+				font-family: "微软雅黑";
+				color: #141f3f;
+				background-color: #2888ac;
+			}
+			
+			.back {
+				width: 120px;
+				height: 80px;
+				border-left: none;
+				position: absolute;
+				top: 30px;
+				left: 0px;
+				background-color: #FFFFFF;
+				font-size: 28px;
+				color: #2888ac;
+				line-height: 80px;
+				border-radius: 20px;
+				text-align: center;
+				text-decoration: none;
+				letter-spacing: 10px;
+			}
+			
+			.bg {
+				position: fixed;
+				width: 640px;
+				height: 100%;
+				top: 0;
+				z-index: -1;
+				;
+			}
+			
+			.tips {
+				font-size: 26px;
+				color: #141f3f;
+				margin: 0px 0 20px 0;
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				padding-top: 0px;
+				width: 100%;
+				top: 100px;
+				padding-left: 0px;
+				position: absolute;
+			}
+			
+			.tips b {
+				font-size: 35px;
+				color: #141f3f;
+				margin: 0 5px;
+				font-family: "Arial";
+			}
+			
+			.order {
+				zoom: 1;
+				overflow: hidden;
+				width: 536px;
+				margin: 0 auto;
+				margin-top: 180px;
+			}
+			
+			.order a {
+				float: left;
+				width: 264px;
+				height: 76px;
+				line-height: 76px;
+				text-align: center;
+				font-size: 26px;
+				border: 2px solid #141f3f;
+				color: #141f3f;
+			}
+			
+			.order a:first-child {
+				border-top-left-radius: 76px;
+				border-bottom-left-radius: 76px;
+			}
+			
+			.order a:last-child {
+				border-top-right-radius: 76px;
+				border-bottom-right-radius: 76px;
+			}
+			
+			.order a.on {
+				background: #141f3f;
+				color: #fff;
+			}
+			
+			.list {
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+				margin-top: 40px;
+				padding-bottom: 100px;
+			}
+			
+			.list li:first-child {
+				border-top: 1px solid #78a024;
+			}
+			
+			.list li {
+				border-bottom: 1px solid #78a024;
+				zoom: 1;
+				overflow: hidden;
+				padding: 30px 40px;
+				position: relative;
+			}
+			
+			.list li img {
+				float: left;
+				width: 80px;
+				height: 80px;
+				border-radius: 80px;
+				-webkit-border-radius: 80px;
+				border: 2px solid #141f3f;
+				box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+			}
+			
+			.list li p {
+				float: left;
+				margin: 0px;
+				margin-left: 20px;
+
+			}
+			
+			.list li p a {
+				width: 240px;
+				display: block;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+			
+			.list li p a:first-child {
+				font-size: 24px;
+				color: #141f3f;
+			}
+			
+			.list li p a:last-child {
+				font-size: 20px;
+				color: #1d3476;
+				margin-top: 18px;
+				font-family: "Arial";
+			}
+			
+			.list li b {
+				float: right;
+				font-size: 24px;
+				color: #141f3f;
+				line-height: 80px;
+				text-align: center;
+				font-family: "Arial";
+				font-weight: normal;
+				position: absolute;
+				right: 40px;
+				top: 8px;
+			}
+			
+			.more {
+				text-align: center;
+				display: none;
+			}
+			
+			.more img {
+				margin: 50px 0;
+			}
+		</style>
+
+		<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script src="js/game.js"></script>
+
+	</head>
+
+	<body>
+		<!-- 返回按钮 -->
+		<a class="back" href="Index.html">返回</a>
+		<div class="tips">
+			当前已经有<b>1512</b>人玩了游戏
+		</div>
+		<div class="order">
+
+		</div>
+
+		<ul class="list">
+
+		</ul>
+		<div class="more ">
+			<img src="http://www.yun-app.cn/Public/mobile/img/loader.gif ">
+		</div>
+		<div class="bg "></div>
+		<!-- 微信接口 -->
+		<script type="text/javascript " src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js "></script>
+		<script>
+			$(function() {
+				$.ajax({
+					type: "GET",
+					dataType: "json",
+					url: "js/onlookers.json",
+					async: false,
+					success: function(result) {
+						console.log(result)
+						if(result.normal) {
+							var msg = eval('(' + result.msg + ')')
+
+							$.each(msg.cards, function(index, obj) {
+
+								var html = '<li>';
+								html += '<img src="' + obj.msg + '" />';
+								html += '<p><a>' + obj.cardName + '</a><a>' + obj.count + '</a></p>';
+								html += '<b>最佳记录：' + obj.cardId + '关</b>';
+								html += '<p style="position: absolute; right: 40px; font-size: 24px; top: 70px;"">闯关次数：' + obj.count + '次</p>';
+								html += '</li>';
+								$(".list").append(html);
+							});
+						} else {
+							if(result.msg == "EndTask ") {
+								alert('本活动已经结束，谢谢参与！');
+								return;
+							} else if(result.msg == "LimitOf ") {
+								alert('每天最多可以参加3次，欢迎明天继续参加..');
+							} else if(result.msg == 'NoActivity') {
+								alert('没有此活动')
+							} else if(result.msg = 'NoOpenTask') {
+								alert('活动还没开始')
+							}
+						}
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>
