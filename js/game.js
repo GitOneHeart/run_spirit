@@ -266,13 +266,8 @@ $(function() {
 					$('.successPanel').hide();
 				})
 			}
-
-
-
-
-
-			//如果等于第八关
-			if(this.currentLevel == 1) {
+	//如果等于第八关
+			if(this.currentLevel == 8) {
 				//记录分数
 				_this.postGameLevel();
 				$('.failPanel').show();
